@@ -149,6 +149,20 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           this.language = event.detail.value;
         }.bind(this));
 
+        this.addEventListener('twemojify', function(event) {
+          if (!this.isUsingTwemoji) {
+            var script = document.createElement('script');
+            script.async = true;
+            script.src = '//twemoji.maxcdn.com/2/twemoji.min.js?2.2';
+            script.onload = function() {
+              // Twemoji loaded! Do something here
+            };
+            document.head.appendChild(script);
+            this.isUsingTwemoji = true;
+
+          }
+        }.bind(this));
+
         this.$.googleAuth.auth.onAuthStateChanged(function(user) {
           if (!!user) {
             this.importHref(this.resolveUrl('moji-feed.html'), function() {

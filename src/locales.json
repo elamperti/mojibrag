@@ -11,6 +11,8 @@
     "new-post-header": "Write a new post",
     "new-post-sample": "Write your cool message here!",
     "new-post-preview-header": "Preview (what you type is translated to emoji)",
+    "problem-viewing-emoji": "Problems viewing emoji?",
+    "activate-twemoji": "Activate twemoji",
     "in-channel": "In channel",
     "post-button": "Post!",
     "new-channel-header": "Create new channel",

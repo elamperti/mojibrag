@@ -98,6 +98,11 @@
       <paper-button on-click="_post">{{localize('post-button')}}</paper-button>
     </div>
 
+    <div hidden$="[[isUsingTwemoji]]">
+      <span>{{localize('problem-viewing-emoji')}}</span>
+      <paper-button on-click="_twemojify">{{localize('activate-twemoji')}}</paper-button>
+    </div>
+
   </template>
 
   <script>
@@ -109,6 +114,13 @@
       behaviors: [
         Polymer.AppLocalizeBehavior
       ],
+
+      properties: {
+        isUsingTwemoji: {
+          type: Boolean,
+          value: !!window.twemoji
+        },
+      },
 
       registered: function() {
         var request = new XMLHttpRequest();
@@ -186,6 +198,11 @@
         }
       },
 
+      _twemojify: function() {
+        this.fire('twemojify');
+        this.isUsingTwemoji = true;
+      },
+
       /* From https://github.com/notwaldorf/emoji-translate */
       _translateWord: function(word) {
         // Punctuation blows. Get all the punctuation at the start and end of the word.
@@ -220,7 +237,8 @@
             Polymer.dom(node).appendChild(option);
           }
         }
-        return node;
+
+        return window.twemoji ? twemoji.parse(node) : node;
       },
 
       _getEmoji: function(originalWord) {
